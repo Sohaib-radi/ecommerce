@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  hashedPassword  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  favoriteIds     String[] @db.ObjectId
+
+  accounts Account[]
+}
+
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @db.ObjectId
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.String
+  access_token       String?  @db.String
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.String
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Category {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String
+  products Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Image {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId String  @db.ObjectId
+  url      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product    Product   @relation(fields: [productId], references: [id])
+}
+
+  model Product {
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  categoryId     String     @db.ObjectId
+  name           String
+  price          Float
+  description    String?
+  isFeatured     Boolean    @default(false)
+  quantity       Int?
+  volum          Int?
+  specification  String?
+  ShipFrom       String?
+  Manufacturer   String?
+  countryOrigine String?
+  probleme       String?
+  isArchived     Boolean    @default(false)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  images         Image[]
+  coments        Comment[]
+  category       Category   @relation(fields: [categoryId], references: [id])
+}
+model Comment {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  comment       String
+  product       Product   @relation(fields: [productId], references: [id])
+  productId     String @db.ObjectId
+}
+model OrderItem {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId       String   @db.ObjectId
+  name           String
+  quantity      Int
+  price          Float        
+  Order         Order    @relation(fields: [orderId], references: [id])
+
+  
+}
+
+model Order {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  orderItems        OrderItem[]
+  isPaid            Boolean
+  firstName         String
+  lastName          String
+  email             String
+  shippingMethod    String
+  payementMethod    String
+  street            String
+  zipCode           String
+  country           String
+  phone             String
+  address           String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
