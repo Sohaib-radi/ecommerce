@@ -61,6 +61,7 @@ export default function EcommerceProductView() {
 
           <Grid xs={12} md={6} lg={5}>
             <EcommerceProductDetailsInfo
+              id={1}
               name={_mockProduct.name}
               price={_mockProduct.price}
               caption={_mockProduct.caption}
