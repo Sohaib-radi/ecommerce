@@ -32,15 +32,26 @@ export default function EcommerceProductItemHero({ product }: Props) {
         md: 0,
       }}
       sx={{
-        py: 10,
+        py: { xs: 5, md: 10 },
         px: { xs: 3, md: 10 },
       }}
     >
+       <Grid xs={12} md={6}>
+        <Image
+          src={coverUrl}
+          sx={{
+            filter: `drop-shadow(20px 20px 24px ${alpha(theme.palette.common.black, 0.16)})`,
+            maxWidth: 400,
+            ml: 'auto',
+            mr: { xs: 'auto', md: 'unset' },
+          }}
+        />
+      </Grid>
       <Grid xs={12} md={6}>
         <Box
           sx={{
             maxWidth: { md: 440 },
-            textAlign: { xs: 'center', md: 'unset' },
+            textAlign: { xs: 'center', md: 'left' },
           }}
         >
           <Label color="warning" sx={{ mb: 2 }}>
@@ -68,17 +79,7 @@ export default function EcommerceProductItemHero({ product }: Props) {
         </Box>
       </Grid>
 
-      <Grid xs={12} md={6}>
-        <Image
-          src={coverUrl}
-          sx={{
-            filter: `drop-shadow(20px 20px 24px ${alpha(theme.palette.common.black, 0.16)})`,
-            maxWidth: 400,
-            ml: 'auto',
-            mr: { xs: 'auto', md: 'unset' },
-          }}
-        />
-      </Grid>
+     
     </Grid>
   );
 }
