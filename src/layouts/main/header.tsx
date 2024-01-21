@@ -66,7 +66,7 @@ export default function Header({ headerOnDark }: Props) {
               position: 'absolute',
             }}
           >
-            MISK
+            Misk
           </Label>
       </Box>
 
