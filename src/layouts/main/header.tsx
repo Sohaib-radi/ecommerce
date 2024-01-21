@@ -53,6 +53,21 @@ export default function Header({ headerOnDark }: Props) {
     <>
       <Box sx={{ lineHeight: 0, position: 'relative' }}>
         <Logo />
+        <Label
+            color="info"
+            sx={{
+              ml: 0.5,
+              px: 0.5,
+              top: -14,
+              left: 60,
+              height: 20,
+              fontSize: 11,
+              cursor: 'pointer',
+              position: 'absolute',
+            }}
+          >
+            MISK
+          </Label>
       </Box>
 
       <>

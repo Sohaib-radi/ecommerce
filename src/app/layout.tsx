@@ -22,9 +22,9 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Zone UI Kit',
+  title: 'Misk Zone',
   description:
-    'The ZONE is built on top of MUI, a powerful library that provides flexible, customizable, and easy-to-use components.',
+    'The MIsk ZONE ',
   keywords: 'react,material,kit,application,dashboard,admin,template',
   manifest: '/manifest.json',
   icons: [
