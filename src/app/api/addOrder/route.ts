@@ -49,24 +49,7 @@ export async function POST(request: Request) {
     // Return a JSON response with the created order
     return NextResponse.json({ order: createdOrder }, { status: 201 });
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      // Handle Prisma-specific errors
-      if (error.code === "P2002") {
-        messageError =
-          "There is already a user with this email, delete user and try again or create with a different email";
-      }
-      if (error.code === "P1001") {
-        messageError = "Database server error. Please make sure your database server is running";
-      }
-      if (error.code === "P1010") {
-        messageError =
-          "Database server access error. Please contact the database server administrator";
-      }
+      messageError = "Database server access error. Please contact the database server administrator";
       return NextResponse.json({ message: messageError }, { status: 500 });
-    }
-
-    // Handle other types of errors
-    console.log(error);
-    return NextResponse.json({ message: "Network error, please try again" }, { status: 400 });
   }
 }
